@@ -6,6 +6,7 @@ To follow this tutorial, you need:
 
 One Ubuntu 20.04 server set up by following the Ubuntu 20.04 initial server setup guide, including a sudo non-root user and a firewall.
 Node.js installed using the official PPA, as explained in option 2 of How To Install Node.js on Ubuntu 20.04. A few Rails features, such as the Asset Pipeline, depend on a JavaScript Runtime. Node.js provides this functionality.
+
 ---
 Step 1 – Install rbenv and Dependencies
 Ruby relies on several packages that you can install through your package manager. Once those are installed, you can install rbenv and use it to install Ruby.
