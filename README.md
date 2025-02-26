@@ -1,5 +1,183 @@
 # RORTMS
-### **🚀 Sample Ruby on Rails Project: Transportation Management System (TMS) API for a Mobile App**  
+### **How To Install Ruby on Rails with rbenv on Ubuntu 20.04**
+https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rbenv-on-ubuntu-20-04#step-4-installing-rails
+Prerequisites
+To follow this tutorial, you need:
+
+One Ubuntu 20.04 server set up by following the Ubuntu 20.04 initial server setup guide, including a sudo non-root user and a firewall.
+Node.js installed using the official PPA, as explained in option 2 of How To Install Node.js on Ubuntu 20.04. A few Rails features, such as the Asset Pipeline, depend on a JavaScript Runtime. Node.js provides this functionality.
+---
+Step 1 – Install rbenv and Dependencies
+Ruby relies on several packages that you can install through your package manager. Once those are installed, you can install rbenv and use it to install Ruby.
+
+First, update your package list:
+```
+sudo apt update
+```
+Next, install the dependencies required to install Ruby:
+
+```
+sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
+```
+After installing the dependencies, you can install rbenv itself. Use curl to fetch the install script from Github and pipe it directly to bash to run the installer:
+```
+curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
+```
+Next, add ~/.rbenv/bin to your $PATH so that you can use the rbenv command line utility. Do this by altering your ~/.bashrc file so that it affects future login sessions:
+```
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+```
+Then, add the command eval "$(rbenv init -)" to your ~/.bashrc file so rbenv loads automatically:
+```
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+```
+Next, apply the changes you made to your ~/.bashrc file to your current shell session:
+```
+source ~/.bashrc
+```
+Verify that rbenv is set up properly by running the type command, which will display more information about the rbenv command:
+```
+type rbenv
+```
+Your terminal window will display the following:
+```
+Output
+rbenv is a function
+rbenv ()
+{
+    local command;
+    command="${1:-}";
+    if [ "$#" -gt 0 ]; then
+        shift;
+    fi;
+    case "$command" in
+        rehash | shell)
+            eval "$(rbenv "sh-$command" "$@")"
+        ;;
+        *)
+            command rbenv "$command" "$@"
+        ;;
+    esac
+}
+```
+At this point, you have both rbenv and ruby-build installed. Let’s install Ruby next.
+---
+### **Step 2 – Installing Ruby with ruby-build**
+With the ruby-build plugin now installed, you can install whatever versions of Ruby that you may need with a single command. First, list all the available versions of Ruby:
+```
+rbenv install -l
+```
+The output of that command will be a list of versions that you can choose to install:
+```
+Output
+2.6.8
+2.7.4
+3.0.2
+jruby-9.2.19.0
+mruby-3.0.0
+rbx-5.0
+truffleruby-21.2.0.1
+truffleruby+graalvm-21.2.0
+
+Only latest stable releases for each Ruby implementation are shown.
+Use 'rbenv install --list-all / -L' to show all local versions.
+```
+Now let’s install Ruby 2.7.6:
+```
+rbenv install 2.7.6
+```
+Installing Ruby can be a lengthy process, so be prepared for the installation to take some time to complete.
+
+Once it’s done installing, set it as your default version of Ruby with the global sub-command:
+```
+rbenv global 2.7.6
+```
+Verify that Ruby was properly installed by checking its version number:
+```
+ruby -v
+```
+If you installed version 2.7.6 of Ruby, this command will return output like this:
+```
+Output
+ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x86_64-linux]
+```
+---
+### **Step 3 – Working with Gems**
+Gems are the way Ruby libraries are distributed. You use the gem command to manage these gems, and use this command to install Rails.
+
+When you install a gem, the installation process generates local documentation. This can add a significant amount of time to each gem’s installation process, so turn off local documentation generation by creating a file called ~/.gemrc which contains a configuration setting to turn off this feature:
+```
+echo "gem: --no-document" > ~/.gemrc
+```
+Bundler is a tool that manages gem dependencies for projects. Install the Bundler gem next, as Rails depends on it:
+```
+gem install bundler
+```
+You’ll receive the following output:
+```
+Output
+Fetching bundler-2.2.27.gem
+Successfully installed bundler-2.2.27
+1 gem installed
+```
+You can use the gem env command (the subcommand env is short for environment) to learn more about the environment and configuration of gems. You can confirm where gems are being installed by using the home argument, like this:
+```
+gem env home
+```
+You’ll receive an output similar to this:
+```
+Output
+/home/sammy/.rbenv/versions/2.7.6/lib/ruby/gems/2.7.0
+```
+Once you have gems set up, you can install Rails.
+---
+###**Step 4 – Installing Rails**
+To install Rails, use the gem install command along with the -v flag to specify the version. For this tutorial, you’ll use version 6.1.4.1:
+```
+gem install rails -v 6.1.4.1
+```
+The gem command installs the gem you specify, as well as any of its dependencies. Rails is a complex web development framework and has many dependencies, so the process will take some time to complete. Eventually, you’ll receive a message stating that Rails is installed, along with its dependencies:
+```
+Output
+...
+Successfully installed rails-6.1.4.1
+37 gems installed
+```
+Note: If you would like to install a different version of Rails, you can list the valid versions of Rails by doing a search, which will output a list of possible versions. You can then install a specific version, such as 4.2.7:
+```
+gem search '^rails$' --all
+gem install rails -v 4.2.7
+```
+If you would like to install the latest version of Rails, run the command without a version specified:
+```
+gem install rails
+```
+rbenv works by creating a directory of shims, which point to the files used by the Ruby version that’s currently enabled. Through the rehash sub-command, rbenv maintains shims in that directory to match every Ruby command across every installed version of Ruby on your server. Whenever you install a new version of Ruby or a gem that provides commands as Rails does, you should run the following:
+```
+rbenv rehash
+```
+Verify that Rails has been installed properly by printing its version, with the following command:
+```
+rails -v
+```
+If it’s installed properly, this command will return the version of Rails that was installed:
+```
+Output
+Rails 6.1.4.1
+```
+
+
+
+
+
+
+
+
+
+
+
+
+### ** Ruby on Rails Project: Transportation Management System (TMS) API for a Mobile App**  
 
 This project demonstrates a **Ruby on Rails backend API** for a **Transportation Management System (TMS)** that serves a **mobile application** (React Native, Flutter, or any frontend). The API will manage **vehicles, drivers, trips, and geolocation tracking**.
 
