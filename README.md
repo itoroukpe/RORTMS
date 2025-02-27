@@ -552,6 +552,98 @@ Installing emulator
 ```
 sudo apt install google-android-emulator-installer
 ```
+Your error message shows that several components required for Android development are missing or not configured correctly. Here's what you need to address:
+
+---
+
+### 1. Install and Configure Java
+
+The error regarding JAVA_HOME indicates that Java isn't installed or the environment variable isn't set.
+
+- **Install Java:**  
+  On Ubuntu, for example, you can install OpenJDK:
+  ```bash
+  sudo apt-get update
+  sudo apt-get install openjdk-11-jdk
+  ```
+  Adjust the version if you require a different one.
+
+- **Set JAVA_HOME:**  
+  Find your Java installation path (commonly `/usr/lib/jvm/java-11-openjdk-amd64` on Ubuntu). Then set the environment variable:
+  ```bash
+  export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+  export PATH=$JAVA_HOME/bin:$PATH
+  ```
+  To make these changes permanent, add them to your shell’s profile (e.g., `~/.bashrc` or `~/.zshrc`).
+
+- **Verify Installation:**  
+  Run:
+  ```bash
+  java -version
+  ```
+  to confirm Java is properly installed.
+
+---
+
+### 2. Install Android Platform Tools
+
+The error `/bin/sh: 1: adb: not found` means that the Android Debug Bridge (adb) is missing.
+
+- **Install via Android Studio:**  
+  If you have Android Studio, make sure you have installed the **Android SDK Platform Tools**.  
+  Locate the platform-tools directory (usually inside `~/Android/Sdk/platform-tools`) and add it to your PATH:
+  ```bash
+  export PATH=$PATH:~/Android/Sdk/platform-tools
+  ```
+  Adjust the path based on your installation.
+
+- **Install Standalone:**  
+  Alternatively, you can download the standalone [Android Platform Tools](https://developer.android.com/studio/releases/platform-tools) and add the directory containing `adb` to your PATH.
+
+- **Verify ADB:**  
+  Run:
+  ```bash
+  adb version
+  ```
+  to ensure it’s available.
+
+---
+
+### 3. Create an Android Emulator
+
+Your message also indicates no emulators were found:
+
+- **Using Android Studio:**  
+  Open Android Studio and go to **AVD Manager** (found under the "Tools" menu) to create a new virtual device.  
+  Once created, you can launch the emulator manually.
+
+- **Using Command Line:**  
+  If you prefer the command line and have the necessary tools installed, you can list available AVDs with:
+  ```bash
+  emulator -list-avds
+  ```
+  If none exist, create one using the `avdmanager` tool.
+
+- **Run Emulator:**  
+  After setting up an AVD, start it manually or re-run your command:
+  ```bash
+  npx react-native run-android
+  ```
+  The CLI will attempt to launch the emulator if one isn’t already running.
+
+---
+
+### 4. Verify Your Environment
+
+Finally, run the React Native doctor command to verify that your environment is set up correctly:
+```bash
+npx react-native doctor
+```
+This tool will help you identify and fix any further configuration issues.
+
+---
+
+By ensuring that Java, adb, and an Android emulator are properly installed and configured, you should be able to run your React Native app on Android without encountering these errors.
 ---
 
 ## **📌 Step 2: Set Up API Integration**
