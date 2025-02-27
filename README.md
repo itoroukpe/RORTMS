@@ -454,7 +454,85 @@ Now that we have a **Ruby on Rails API** for the **Transportation Management Sys
 First, make sure you have **Node.js** and **React Native CLI** installed.
 
 ### **1. Install React Native CLI (if not installed)**
+It appears that nvm (Node Version Manager) isn't installed on your system. nvm lets you easily install and manage multiple versions of Node.js, and it also helps avoid global permission issues.
+
+### To Install nvm:
+
+1. **Download and Install via Script:**  
+   Run the following command in your terminal:
+   ```bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+   ```
+   Alternatively, if you prefer wget:
+   ```bash
+   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+   ```
+
+2. **Restart Your Terminal:**  
+   After the installation completes, close and reopen your terminal or source your profile:
+   ```bash
+   source ~/.bashrc
+   ```
+   (Replace `.bashrc` with `.zshrc` if you’re using zsh.)
+
+3. **Verify Installation:**  
+   Confirm nvm is installed by running:
+   ```bash
+   nvm --version
+   ```
+
+4. **Install Node.js Using nvm:**  
+   Now you can install the latest Node.js version:
+   ```bash
+   nvm install node
+   ```
+
+Once nvm is set up and Node.js is installed, you should be able to install global npm packages without encountering permission errors.
+---
+This error indicates that you don't have permission to write to the global npm modules directory (`/usr/local/lib/node_modules`). Here are a few approaches to resolve this:
+
+### 1. Use a Node Version Manager (Recommended)
+Using a tool like [nvm](https://github.com/nvm-sh/nvm) allows you to manage Node versions and install global packages in your home directory, avoiding permission issues.
+
+- Install nvm, then install a Node version with:
+  ```bash
+  nvm install node
+  ```
+- After that, you can run:
+  ```bash
+  npm install -g react-native-cli
+  ```
+  without running into permission errors.
+
+### 2. Change npm’s Default Directory for Global Packages
+You can configure npm to use a directory in your home folder:
+
+- Create a directory for global packages:
+  ```bash
+  mkdir ~/.npm-global
+  ```
+- Configure npm to use the new directory:
+  ```bash
+  npm config set prefix '~/.npm-global'
+  ```
+- Add the new directory to your PATH. For example, add this line to your `~/.profile` or `~/.bashrc`:
+  ```bash
+  export PATH=~/.npm-global/bin:$PATH
+  ```
+- Reload your profile:
+  ```bash
+  source ~/.profile
+  ```
+
+
+### 3. Use sudo (Less Recommended)
+You can run the install command with elevated permissions, though this is generally not advised due to potential security risks and permission conflicts:
+  
 ```bash
+sudo npm install -g react-native-cli
+```
+
+Using one of these methods should help you resolve the EACCES permission error when installing global npm packages.```bash
 npm install -g react-native-cli
 ```
 
