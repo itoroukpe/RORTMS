@@ -548,7 +548,10 @@ cd TMSMobile
 ```bash
 npm install axios react-navigation react-native-async-storage
 ```
-
+Installing emulator
+```
+sudo apt install google-android-emulator-installer
+```
 ---
 
 ## **📌 Step 2: Set Up API Integration**
