@@ -500,7 +500,8 @@ Using a tool like [nvm](https://github.com/nvm-sh/nvm) allows you to manage Node
   ```
 - After that, you can run:
   ```bash
-  npm install -g react-native-cli
+  //npm install -g react-native-cli
+  npx @react-native-community/cli init TMSMobile
   ```
   without running into permission errors.
 
@@ -529,7 +530,8 @@ You can configure npm to use a directory in your home folder:
 You can run the install command with elevated permissions, though this is generally not advised due to potential security risks and permission conflicts:
   
 ```bash
-sudo npm install -g react-native-cli
+//sudo npm install -g react-native-cli
+npx @react-native-community/cli init TMSMobile
 ```
 
 Using one of these methods should help you resolve the EACCES permission error when installing global npm packages.```bash
